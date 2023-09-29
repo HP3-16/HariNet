@@ -1,0 +1,1 @@
+Tensors - Loss Fn - NeuralNetworks - Optimization - Training
