@@ -16,9 +16,10 @@ class Layer:
         raise NotImplementedError
 
 class Linear(Layer):
-    def __init__(self, input_size: int,output_size: int) -> None:
+    def __init__(self, input_size:int, output_size:int) -> None:
+        super().__init__()
         self.params["w"] = np.random.randn(input_size,output_size)
-        self.params["b"] = np.random.rand(output_size)
+        self.params["b"] = np.random.randn(output_size)
 
     def forward(self, inputs: Tensor) -> Tensor:
         self.inputs = inputs
@@ -58,6 +59,7 @@ class Activation(Layer):
     
     def backprop(self, grad: Tensor) -> Tensor:
         return self.fdash(self.inputs) * grad
+    
 def tanh(x: Tensor) -> Tensor:
     return np.tanh(x)
     
@@ -66,6 +68,9 @@ def tanhdash(x: Tensor) -> Tensor:
     y = tanh(x)
     return 1 - y**2
 
+class Tanh(Activation):
+    def __init__(self):
+        super().__init__(tanh,tanhdash)
         
 
 
